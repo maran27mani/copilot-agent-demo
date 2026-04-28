@@ -1,1 +1,2 @@
-# No external dependencies required for this project
+# Development dependencies for testing
+pytest>=7.0.0
