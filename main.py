@@ -27,6 +27,41 @@ def divide(a, b):
     return a / b
 
 
+def is_numeric(value):
+    """
+    Validate if a string value can be converted to a number.
+    
+    Args:
+        value (str): The string value to validate
+        
+    Returns:
+        bool: True if the value is numeric, False otherwise
+    """
+    try:
+        float(value)
+        return True
+    except (ValueError, TypeError):
+        return False
+
+
+def get_numeric_input(prompt):
+    """
+    Get and validate numeric input from user.
+    
+    Args:
+        prompt (str): The prompt to display to the user
+        
+    Returns:
+        float: The validated numeric input
+    """
+    while True:
+        user_input = input(prompt).strip()
+        if is_numeric(user_input):
+            return float(user_input)
+        else:
+            print(f"Invalid input '{user_input}'. Please enter a valid number.")
+
+
 def main():
     """Main calculator interface."""
     print("=" * 40)
@@ -51,10 +86,10 @@ def main():
             print("Invalid choice! Please try again.")
             continue
         
+        num1 = get_numeric_input("Enter first number: ")
+        num2 = get_numeric_input("Enter second number: ")
+        
         try:
-            num1 = float(input("Enter first number: "))
-            num2 = float(input("Enter second number: "))
-            
             if choice == '1':
                 result = add(num1, num2)
                 print(f"\nResult: {num1} + {num2} = {result}")
@@ -70,8 +105,6 @@ def main():
         
         except ValueError as e:
             print(f"\nError: {e}")
-        except ValueError:
-            print(f"\nError: Invalid input. Please enter valid numbers.")
 
 
 if __name__ == "__main__":
